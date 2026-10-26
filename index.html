@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Science for Kids: Turning Numbers into Stories</title>
+<meta name="description" content="A fun, interactive landing page that shows kids and parents how data science turns numbers into stories. Try the vote lab, then explore demo, programs and blog.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#D7263D;--orange:#FF8A1F;--black:#161010;--white:#FFF8F0;--copper:#B87333;--font-d:'Baloo 2','Trebuchet MS',sans-serif;--font-b:'Nunito','Segoe UI',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--white);color:var(--black);font-size:18px;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:4px solid var(--orange);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:20;background:var(--black);color:var(--white);border-bottom:4px solid var(--copper)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:12px;padding-bottom:12px}
+.logo{font-family:var(--font-d);font-weight:800;font-size:1.3rem;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{display:inline-flex;gap:3px;align-items:flex-end;height:24px}
+.logo i b{width:7px;border-radius:2px 2px 0 0;background:var(--orange)}
+.logo i b:nth-child(1){height:10px;background:var(--copper)}.logo i b:nth-child(2){height:24px}.logo i b:nth-child(3){height:16px;background:var(--red)}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav a{text-decoration:none;font-weight:700;padding:6px 14px;border-radius:99px}
+nav a:hover{background:var(--copper)}
+nav a.go{background:var(--red)}
+nav a.go:hover{background:var(--orange);color:var(--black)}
+.hero{background:var(--black);color:var(--white);padding:56px 0 72px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
+h1{font-family:var(--font-d);font-weight:800;font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.02}
+h1 span{display:block;color:var(--orange)}
+.hero p.lead{margin:18px 0 26px;max-width:46ch;color:#f1dfcf}
+.btn{display:inline-block;font-family:var(--font-d);font-weight:800;font-size:1.1rem;text-decoration:none;padding:12px 26px;border:3px solid var(--black);border-radius:14px;background:var(--orange);color:var(--black);box-shadow:5px 5px 0 var(--copper);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--copper)}
+.btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--copper)}
+.btn.red{background:var(--red);color:var(--white)}
+.btn.line{background:transparent;color:var(--white);border-color:var(--white)}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.lab{background:var(--white);color:var(--black);border:4px solid var(--copper);border-radius:24px;padding:22px;box-shadow:10px 10px 0 var(--red)}
+.lab h2{font-family:var(--font-d);font-size:1.4rem;line-height:1.2}
+.lab small{display:block;color:#5a4a40;margin-bottom:12px}
+.bars{display:flex;align-items:flex-end;justify-content:space-around;gap:10px;height:200px;border-bottom:4px solid var(--black);padding:0 6px}
+.bar{flex:1;max-width:80px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%}
+.bar div{width:100%;min-height:8px;border-radius:12px 12px 0 0;border:3px solid var(--black);border-bottom:0;transition:height .35s cubic-bezier(.3,1.6,.5,1);display:flex;justify-content:center;font-family:var(--font-d);font-weight:800;color:var(--white);padding-top:2px}
+.bar:nth-child(1) div{background:var(--red)}.bar:nth-child(2) div{background:var(--orange);color:var(--black)}.bar:nth-child(3) div{background:var(--copper)}.bar:nth-child(4) div{background:var(--black)}
+.votes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.votes button{font:700 1rem var(--font-b);border:3px solid var(--black);background:var(--white);border-radius:12px;padding:8px 2px;cursor:pointer;transition:transform .12s,background .12s}
+.votes button:hover{background:var(--orange)}
+.votes button:active{transform:scale(.92)}
+.story{margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--black);color:var(--white);font-weight:700;min-height:3.4em}
+.story em{font-style:normal;color:var(--orange)}
+.reset{margin-top:10px;background:none;border:0;font:700 .95rem var(--font-b);color:var(--red);cursor:pointer;text-decoration:underline}
+section{padding:72px 0}
+h2.t{font-family:var(--font-d);font-weight:800;font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.1;margin-bottom:10px}
+.sub{max-width:56ch;margin-bottom:34px;color:#4a3b32}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.step{background:var(--orange);border:4px solid var(--black);border-radius:20px;padding:20px;position:relative}
+.step:nth-child(2){background:var(--white)}.step:nth-child(3){background:var(--copper);color:var(--white)}.step:nth-child(4){background:var(--red);color:var(--white)}
+.step h3{font-family:var(--font-d);font-size:1.5rem}
+.step .n{position:absolute;top:-16px;right:14px;background:var(--black);color:var(--white);font-family:var(--font-d);width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
+.band{background:var(--black);color:var(--white)}
+.band .sub{color:#e6d3c2}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.card{display:flex;flex-direction:column;background:var(--white);color:var(--black);border:4px solid var(--black);border-radius:24px;padding:26px;text-decoration:none;box-shadow:8px 8px 0 var(--copper);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:rotate(-1deg) translateY(-4px);box-shadow:12px 12px 0 var(--orange)}
+.card h3{font-family:var(--font-d);font-size:1.6rem;line-height:1.15;margin-bottom:6px}
+.card p{flex:1;margin-bottom:16px}
+.card b{font-family:var(--font-d);color:var(--red);font-size:1.1rem}
+.card .tag{font-size:2rem;line-height:1;margin-bottom:8px}
+.cta{background:var(--red);color:var(--white);text-align:center;border-top:6px solid var(--copper);border-bottom:6px solid var(--copper)}
+.cta .btn{background:var(--white)}
+.cta p{max-width:50ch;margin:0 auto 24px}
+footer{background:var(--black);color:#e6d3c2;padding:40px 0;font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
+footer a{margin-right:16px;font-weight:700;color:var(--orange)}
+footer a:hover{color:var(--white)}
+@media(max-width:900px){.hero .wrap,.cards{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}nav a:not(.go){display:none}body{font-size:17px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+<a class="logo" href="#top"><i aria-hidden="true"><b></b><b></b><b></b></i>Numbers to Stories</a>
+<nav aria-label="Main">
+<a href="#lab">Vote lab</a><a href="#steps">How it works</a><a href="#explore">Explore</a>
+<a class="go" href="https://justacademyjunior.com/free-demo">Free demo</a>
+</nav>
+</div>
+</header>
+
+<main id="top">
+<div class="hero">
+<div class="wrap">
+<div>
+<h1>Data science for kids<span>Turning numbers into stories</span></h1>
+<p class="lead">Every tally mark is a clue. Every chart is a tiny mystery solved. Help your child ask a question, count what they find and tell the story out loud.</p>
+<div class="btns">
+<a class="btn" href="https://justacademyjunior.com/free-demo">Book a free demo</a>
+<a class="btn line" href="#lab">Try the vote lab</a>
+</div>
+</div>
+
+<div class="lab" id="lab">
+<h2>Class vote: best snack fruit?</h2>
+<small>Tap a fruit to add a vote. Watch the story change.</small>
+<div class="bars" id="bars" role="img" aria-label="Bar chart of votes"></div>
+<div class="votes" id="votes"></div>
+<div class="story" id="story" aria-live="polite">No votes yet. Be the first to cast one!</div>
+<button class="reset" id="reset" type="button">Start a new vote</button>
+</div>
+</div>
+</div>
+
+<section id="steps">
+<div class="wrap">
+<h2 class="t">Four steps to any data story</h2>
+<p class="sub">Whether it is a lemonade stand or a space mission, a good data story follows the same path.</p>
+<div class="steps">
+<div class="step"><span class="n">1</span><h3>Ask</h3><p>Pick one clear question, like which pet is the class favourite.</p></div>
+<div class="step"><span class="n">2</span><h3>Collect</h3><p>Count, measure and tidy up your answers so they match.</p></div>
+<div class="step"><span class="n">3</span><h3>Study</h3><p>Find the biggest, the smallest and the average. Spot the pattern.</p></div>
+<div class="step"><span class="n">4</span><h3>Tell</h3><p>Draw it, say it and share it in words anyone can follow.</p></div>
+</div>
+</div>
+</section>
+
+<section class="band" id="explore">
+<div class="wrap">
+<h2 class="t">Pick your next adventure</h2>
+<p class="sub">Four doors, one for every kind of curious family.</p>
+<div class="cards">
+<a class="card" href="https://justacademyjunior.com/free-demo"><div class="tag" aria-hidden="true">🎈</div><h3>Try a free demo class</h3><p>See how a live, friendly lesson feels before you decide anything.</p><b>Book the demo</b></a>
+<a class="card" href="https://justacademyjunior.com/programs"><div class="tag" aria-hidden="true">🚀</div><h3>Browse kids programs</h3><p>Find the course that matches your child's age, speed and interests.</p><b>See all programs</b></a>
+<a class="card" href="https://justacademyjunior.com/blog/data-science-for-kids-turning-numbers-into-stories"><div class="tag" aria-hidden="true">📖</div><h3>Read the full guide</h3><p>A parent friendly blog with simple examples and weekend activities.</p><b>Read the blog</b></a>
+<a class="card" href="https://www.justacademy.co/job-bootcamp-detail/delhi/data-analytics-bootcamp-in-delhi-live-online-business-analytics-training"><div class="tag" aria-hidden="true">🧭</div><h3>See where it leads</h3><p>Curious how these habits grow into real careers? Peek at a data analytics bootcamp for adults.</p><b>View the bootcamp</b></a>
+</div>
+</div>
+</section>
+
+<section class="cta">
+<div class="wrap">
+<h2 class="t">Ready to turn numbers into stories?</h2>
+<p>Tell us about your child and we will help you pick a good first step.</p>
+<a class="btn" href="https://justacademyjunior.com/contact">Enroll now</a>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">
+<div><strong>Numbers to Stories</strong><br>A friendly start in data science for curious kids.</div>
+<div>
+<a href="https://justacademyjunior.com/free-demo">Free demo</a>
+<a href="https://justacademyjunior.com/programs">Programs</a>
+<a href="https://justacademyjunior.com/blog/data-science-for-kids-turning-numbers-into-stories">Blog</a>
+<a href="https://justacademyjunior.com/contact">Contact</a>
+</div>
+</div>
+</footer>
+
+<script>
+(function(){
+var fruits=['Mango','Banana','Grapes','Apple'],emoji=['🥭','🍌','🍇','🍎'],v=[0,0,0,0];
+var bars=document.getElementById('bars'),votes=document.getElementById('votes'),story=document.getElementById('story');
+fruits.forEach(function(f,i){
+var b=document.createElement('div');b.className='bar';b.innerHTML='<div id="b'+i+'"></div><span aria-hidden="true">'+emoji[i]+'</span>';bars.appendChild(b);
+var k=document.createElement('button');k.type='button';k.textContent=emoji[i]+' '+f;k.addEventListener('click',function(){v[i]++;draw();});votes.appendChild(k);
+});
+function draw(){
+var t=v.reduce(function(a,b){return a+b;},0),m=Math.max.apply(null,v);
+v.forEach(function(n,i){var e=document.getElementById('b'+i);e.style.height=(t?Math.max(8,n/Math.max(m,5)*100):0)+'%';e.textContent=n||'';});
+if(!t){story.textContent='No votes yet. Be the first to cast one!';return;}
+var lead=[],i;for(i=0;i<4;i++){if(v[i]===m)lead.push(fruits[i]);}
+var pct=Math.round(m/t*100);
+story.innerHTML=lead.length>1?'It is a tie between <em>'+lead.join(' and ')+'</em> with '+m+' votes each. Who will break it?':'<em>'+lead[0]+'</em> is winning with '+m+' of '+t+' votes, which is about '+pct+'% of the class.';
+}
+document.getElementById('reset').addEventListener('click',function(){v=[0,0,0,0];draw();});
+draw();
+})();
+</script>
+</body>
+</html>
